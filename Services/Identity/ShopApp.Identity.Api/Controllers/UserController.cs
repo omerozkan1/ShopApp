@@ -23,6 +23,7 @@ namespace ShopApp.Identity.Api.Controllers
             _userManager = userManager;
         }
 
+        [Route("/api/[controller]/SignUp")]
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpDto signupDto)
         {

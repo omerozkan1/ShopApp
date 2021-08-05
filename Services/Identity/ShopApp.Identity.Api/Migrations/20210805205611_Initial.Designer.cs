@@ -10,7 +10,7 @@ using ShopApp.Identity.Api.Data;
 namespace ShopApp.Identity.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210805201344_Initial")]
+    [Migration("20210805205611_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
