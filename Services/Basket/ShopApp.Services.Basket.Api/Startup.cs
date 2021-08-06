@@ -50,11 +50,8 @@ namespace ShopApp.Services.Basket.Api
             services.AddSingleton<RedisService>(sp =>
             {
                 var redisSettings = sp.GetRequiredService<IOptions<RedisSettings>>().Value;
-
                 var redis = new RedisService(redisSettings.Host, redisSettings.Port);
-
                 redis.Connect();
-
                 return redis;
             });
 

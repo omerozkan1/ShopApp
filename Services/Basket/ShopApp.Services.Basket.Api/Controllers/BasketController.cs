@@ -9,11 +9,11 @@ namespace ShopApp.Services.Basket.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BasketsController : BaseController
+    public class BasketController : BaseController
     {
         private readonly IBasketService _basketService;
         private readonly ISharedIdentityService _sharedIdentityService;
-        public BasketsController(IBasketService basketService, ISharedIdentityService sharedIdentityService)
+        public BasketController(IBasketService basketService, ISharedIdentityService sharedIdentityService)
         {
             _basketService = basketService;
             _sharedIdentityService = sharedIdentityService;
