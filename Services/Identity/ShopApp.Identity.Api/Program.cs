@@ -51,7 +51,7 @@ namespace ShopApp.Identity.Api
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                     if (!userManager.Users.Any())
                     {
-                        userManager.CreateAsync(new ApplicationUser { UserName = "omerozkan", Email = "omeerozkan52@gmail.com", City = "Ýstanbul" }, "Password1*").Wait();
+                        userManager.CreateAsync(new ApplicationUser { UserName = "ciceksepeti", Email = "ciceksepeti@gmail.com", City = "Istanbul" }, "Password1*").Wait();
                     }
                 }
 

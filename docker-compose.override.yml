@@ -1,0 +1,67 @@
+version: '3.4'
+
+services:
+  basketdb:
+    container_name: basketdb
+    restart: always
+    ports: 
+     - "6379:6379"     
+
+  identitydb:
+    container_name: identitydb
+    restart: always
+    ports: 
+     - "1433:1433"
+    volumes:
+     - identitydb_volume:/var/opt/mssql
+    environment: 
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=Password1* 
+
+  identityserver.api:
+    container_name: identityserver.api
+    restart: on-failure
+    environment: 
+     - ASPNETCORE_ENVIRONMENT=Development
+     - "ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=ShopApp.IdentityDb; User=sa; Password=Password1*"
+    ports:
+     - "5001:80"
+    depends_on: 
+     - identitydb
+
+  basket.api:
+    container_name: basket.api
+    environment: 
+     - ASPNETCORE_ENVIRONMENT=Development
+     - IdentityServerUrl=http://identityserver.api
+     - RedisSettings:Port=6379
+     - RedisSettings:Host=basketdb
+    ports:
+        - "5013:80"
+    depends_on: 
+     - basketdb
+
+  gateway:
+    container_name: gateway
+    environment: 
+     - ASPNETCORE_ENVIRONMENT=Production
+     - IdentityServerURL=http://identityserver.api
+    ports:
+     - "5000:80"
+
+  shopapp.web:
+    container_name: shopapp.web
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ServiceSettings:IdentityBaseUri=http://identityserver.api
+     - ServiceSettings:GatewayBaseUri=http://gateway
+    ports:
+     - "5004:80"
+    depends_on: 
+     - gateway
+     - identityserver.api
+     - basket.api
+    volumes: 
+     - folder:/app
+volumes: 
+    folder:

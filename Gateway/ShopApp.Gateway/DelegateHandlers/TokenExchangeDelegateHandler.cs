@@ -43,7 +43,7 @@ namespace ShopApp.Gateway.DelegateHandlers
                 GrantType = _configuration["TokenGrantType"],
                 SubjectToken = requestToken,
                 SubjectTokenType = "urn:ietf:params:oauth:token-type:access-token",
-                Scope = "openid discount_fullpermission payment_fullpermission"
+                Scope = "openid"
             };
 
             var tokenResponse = await _httpClient.RequestTokenExchangeTokenAsync(tokenExchangeTokenRequest);

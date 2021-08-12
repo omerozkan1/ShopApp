@@ -1,0 +1,76 @@
+{
+  "products": [
+    {
+      "Id": "1",
+      "Name": "Test",
+      "Price": 100,
+      "Description": "Product 1",
+      "Picture": "images/p1.png",
+      "Stock": 10
+    },
+    {
+      "Id": "2",
+      "Name": "Test 2",
+      "Price": 200,
+      "Description": "Product 2",
+      "Picture": "images/p2.png",
+      "Stock": 48
+    },
+    {
+      "Id": "3",
+      "Name": "Test 3",
+      "Price": 300,
+      "Description": "Product 3",
+      "Picture": "images/p3.png",
+      "Stock": 20
+    },
+    {
+      "Id": "4",
+      "Name": "Test 4",
+      "Price": 400,
+      "Description": "Product 4",
+      "Picture": "images/p4.png",
+      "Stock": 100
+    },
+    {
+      "Id": "5",
+      "Name": "Test 5",
+      "Price": 500,
+      "Description": "images/p5.png",
+      "Picture": "images/p5.png",
+      "Stock": 40
+    },
+    {
+      "Id": "6",
+      "Name": "Test 6",
+      "Price": 600,
+      "Description": "Product 6",
+      "Picture": "images/p6.png",
+      "Stock": 200
+    },
+    {
+      "Id": "7",
+      "Name": "Test 7",
+      "Price": 700,
+      "Description": "Product 7",
+      "Picture": "images/p7.png",
+      "Stock": 30
+    },
+    {
+      "Id": "8",
+      "Name": "Test 8",
+      "Price": 800,
+      "Description": "Product 8",
+      "Picture": "images/p8.png",
+      "Stock": 5
+    },
+    {
+      "Id": "9",
+      "Name": "Test 9",
+      "Price": 900,
+      "Description": "Product 9",
+      "Picture": "images/p9.png",
+      "Stock": 100
+    }
+  ]
+}

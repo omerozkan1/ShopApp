@@ -9,8 +9,8 @@ namespace ShopApp.Identity.Api
     {
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
-            new ApiResource("resource_basket"){Scopes={ "basket_fullpermission" } },
-            new ApiResource("resource_gateway"){Scopes={ "gateway_fullpermission" } },
+            new ApiResource("resource_basket") { Scopes={ "basket_fullpermission" } },
+            new ApiResource("resource_gateway"){ Scopes={ "gateway_fullpermission" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -41,7 +41,7 @@ namespace ShopApp.Identity.Api
                     ClientId = "Client",
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    AllowedScopes = { "gateway_fullpermission", IdentityServerConstants.LocalApi.ScopeName }
+                    AllowedScopes = { "basket_fullpermission", "gateway_fullpermission", IdentityServerConstants.LocalApi.ScopeName }
                 },
                  new Client
                 {
@@ -55,15 +55,7 @@ namespace ShopApp.Identity.Api
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime= (int) (DateTime.Now.AddDays(60)- DateTime.Now).TotalSeconds,
                     RefreshTokenUsage= TokenUsage.ReUse
-                },
-                  new Client
-                {
-                    ClientName = "Token Exchange Client",
-                    ClientId = "TokenExchangeClient",
-                    ClientSecrets = { new Secret("secret".Sha256()) },
-                    AllowedGrantTypes = new[] { "urn:ietf:params:oauth:grant-type:token-exchange" },
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId }
-                },
+                }
             };
     }
 }

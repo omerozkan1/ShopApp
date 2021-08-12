@@ -1,5 +1,5 @@
 {
-  "Routes": [ 
+  "Routes": [
     {
       "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
@@ -16,7 +16,7 @@
         "AuthenticationProviderKey": "GatewayAuthenticationScheme",
         "AllowedScopes": [ "basket_fullpermission" ]
       }
-    }   
+    }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5000"

@@ -1,0 +1,61 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="card">
+            <img src="/@Model.Picture" style="height:50%; width:50%;" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Price: @Model.Price $</h4>
+                <div id="plusMinus">
+                    <button type="button" id="sub" class="sub btn btn-light btn-sm">-</button>
+                    <input type="number" id="1" value="1" min="1" max="99" />
+                    <button type="button" id="add" class="add btn btn-light btn-sm">+</button>
+                </div>
+                <input type="hidden" name="form_quantity" id="form_quantity" value="@Model.Quantity" />
+                <div class="d-grid">
+                    <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-productId="@Model.Id" asp-route-quantity="@Model.Quantity" class="add-to-cart btn btn-primary">Add To Cart</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var quantity = 1;
+    $('.add').click(function () {
+        if ($(this).prev().val() < 99) {
+            quantity = $(this).prev().val(+$(this).prev().val() + 1);
+                
+        }
+    });
+    $('.sub').click(function () {
+        if ($(this).next().val() > 1) {
+            if ($(this).next().val() > 1) {
+                quantity = $(this).next().val(+$(this).next().val() - 1);
+            }
+        }
+    });
+
+    $("#add-to-cart").click(function () {
+        $('#form_quantity').val(quantity);
+    });
+
+</script>
+

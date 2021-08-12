@@ -1,0 +1,55 @@
+﻿RemoveBasketItem@model BasketViewModel
+@{
+    ViewData["Title"] = "Index";
+    var culture = new System.Globalization.CultureInfo("tr-TR"); // create InvariantCulture
+    culture.NumberFormat.NumberGroupSeparator = ".";
+}
+
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Cart
+                </h5>
+
+                @if (Model != null && Model.BasketItems.Any())
+                {
+                    <table class="table table-striped">
+
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Process</th>
+                        </tr>
+
+                        @foreach (var basketItem in Model.BasketItems)
+                        {
+                            <tr>
+                                <td>@basketItem.ProductName</td>
+                                <td>@basketItem.Price</td>
+                                <td>
+                                    <a class="btn btn-danger" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-productId="@basketItem.ProductId">Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td>Total Price</td>
+                            <th colspan="2">@Model.TotalPrice $</th>
+                        </tr>
+
+                    </table>
+
+                    <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Keep shopping</a>
+                }
+                else
+                {
+                    <div class="alert alert-info">Your cart is empty</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

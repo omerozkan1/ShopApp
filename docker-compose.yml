@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  basketdb:
+    image: redis   
+  identitydb:
+    image: mcr.microsoft.com/mssql/server   
+  identityserver.api:
+    image: identityserver_api_image
+    build:
+     context: .
+     dockerfile: Services/Identity/ShopApp.Identity.Api/Dockerfile
+  basket.api:
+    image: basket_api_image
+    build:
+      context: .
+      dockerfile: Services/Basket/ShopApp.Services.Basket.Api/Dockerfile   
+  gateway:
+    image: gateway_image
+    build:
+     context: .
+     dockerfile: Gateway/ShopApp.Gateway/Dockerfile
+  shopapp.web:
+    image: ${DOCKER_REGISTRY-}shopappweb
+    build:
+     context: .
+     dockerfile: Clients/ShopApp.Web/Dockerfile
+volumes: 
+    identitydb_volume:  
