@@ -16,7 +16,7 @@
             @Html.Raw("<div class='row row-cols-1 row-cols-md-3 g-4 mb-2'>")
         }
 
-        <div class="col">      
+        <div class="col">
             <div class="card h-100">
                 <img src="/@product.Picture" style="height:250px;" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -24,9 +24,9 @@
                     <p class="card-text">@product.Description</p>
                     <h4 class="text-primary">@product.Price $</h4>
                     <a asp-controller="Home" asp-action="Detail" asp-route-productId="@product.Id" class="btn btn-secondary">Detail</a>
-                    <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-productId="@product.Id" class="btn btn-warning">Add To Cart</a>
+                    <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-productId="@product.Id" asp-route-quantity="1" class="btn btn-warning">Add To Cart</a>
                 </div>
-            </div>        
+            </div>
         </div>
 
         if (count % 3 == 0)
@@ -34,4 +34,8 @@
             @Html.Raw("</div>")
         }
     }
+}
+
+@section Scripts{
+    <script src="~/js/cart.js"></script>
 }

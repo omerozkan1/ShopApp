@@ -2,7 +2,7 @@
 {
     public class ClientSetting
     {
-        public Client Client { get; set; }
-        public Client ClientForUser { get; set; }
+        public Client WebClient { get; set; }
+        public Client WebClientForUser { get; set; }
     }
 }

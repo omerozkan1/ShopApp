@@ -16,7 +16,7 @@ namespace ShopApp.Web.Services.Concrete
             _httpClient = httpClient;
         }
 
-        public async Task AddBasketItem(BasketItemViewModel basketItemViewModel)
+        public async Task<bool> AddBasketItem(BasketItemViewModel basketItemViewModel)
         {
             var basket = await Get();
             if (basket != null)
@@ -32,7 +32,7 @@ namespace ShopApp.Web.Services.Concrete
                 basket.BasketItems.Add(basketItemViewModel);
             }
 
-            await SaveOrUpdate(basket);
+            return await SaveOrUpdate(basket);
         }
 
         public async Task<bool> Delete()

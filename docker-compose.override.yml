@@ -45,23 +45,20 @@ services:
     container_name: gateway
     environment: 
      - ASPNETCORE_ENVIRONMENT=Production
-     - IdentityServerURL=http://identityserver.api
+     - IdentityServerUrl=http://identityserver.api
     ports:
      - "5000:80"
 
-  shopapp.web:
-    container_name: shopapp.web
-    environment:
-     - ASPNETCORE_ENVIRONMENT=Development
-     - ServiceSettings:IdentityBaseUri=http://identityserver.api
-     - ServiceSettings:GatewayBaseUri=http://gateway
-    ports:
-     - "5004:80"
-    depends_on: 
-     - gateway
-     - identityserver.api
-     - basket.api
-    volumes: 
-     - folder:/app
-volumes: 
-    folder:
+  # shopapp.web:
+  #   container_name: shopapp.web
+  #   environment:
+  #    - ASPNETCORE_ENVIRONMENT=Development
+  #    - ServiceSettings:IdentityBaseUri=http://identityserver.api
+  #    - ServiceSettings:GatewayBaseUri=http://gateway
+  #   ports:
+  #    - "5004:80"
+  #   depends_on: 
+  #    - gateway
+  #    - identityserver.api
+  #    - basket.api
+

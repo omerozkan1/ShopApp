@@ -24,20 +24,28 @@ namespace ShopApp.Web.Controllers
             return View(await _basketService.Get());
         }
 
-        public async Task<IActionResult> AddBasketItem(string productId, int? quantity)
+        public async Task<bool> AddBasketItem(string productId, int quantity)
         {
             var product = _productService.GetByProductId(productId);
-            var basketItem = new BasketItemViewModel
+            if (product != null)
             {
-                ProductId = product.Id,
-                ProductName = product.Name,
-                Price = product.Price,
-            };
+                var basketItem = new BasketItemViewModel
+                {
+                    ProductId = product.Id,
+                    ProductName = product.Name,
+                    Price = product.Price,
+                    Quantity = quantity
+                };
 
-            await _basketService.AddBasketItem(basketItem);
-            product.Stock -= quantity.Value;
-            _productService.RemoveProductStock(product);
-            return RedirectToAction(nameof(Index));
+                var result = await _basketService.AddBasketItem(basketItem);
+                if (result)
+                {
+                    product.Stock -= quantity;
+                    _productService.RemoveProductStock(product);
+                }
+                return result;
+            }
+            return false;
         }
 
         public async Task<IActionResult> RemoveBasketItem(string productId)
@@ -49,43 +57,20 @@ namespace ShopApp.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        public async Task<JsonResult> GetBasket()
+        public async Task<IActionResult> RemoveAll()
         {
-            var culture = new System.Globalization.CultureInfo("tr-TR");
-            culture.NumberFormat.NumberGroupSeparator = ".";
+            var result = await _basketService.Delete();
+            if (!result)
+                return NotFound();
 
-            var cart = await _basketService.Get();
-            if (cart != null)
-            {
-                cart.SubTotal = cart.BasketItems.Sum(p => p.Quantity * decimal.Parse(p.Price.ToString(), CultureInfo.InvariantCulture));
-            }
-            else
-            {
-                cart = new BasketViewModel();
-            }
-            
-            return Json(cart);
+            return RedirectToAction(nameof(Index));
         }
+
 
         public int UserBasketItemCount()
         {
             var cart = _basketService.Get().Result;
             return cart.BasketItems.Count;
-        }
-
-        public async Task<bool> ReduceProductFromBasket(string productId)
-        {
-            var cart = await _basketService.Get();
-            if (cart != null)
-            {
-                var product = cart.BasketItems.Where(p => p.ProductId == productId).FirstOrDefault();
-                if (product.Quantity > 1)
-                {
-                    product.Quantity--;
-                }
-            }
-            return true;
         }
     }
 }

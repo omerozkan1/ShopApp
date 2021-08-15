@@ -44,8 +44,8 @@ namespace ShopApp.Web.Services.Concrete
 
             var clientCredentialTokenRequest = new ClientCredentialsTokenRequest
             {
-                ClientId = _clientSetting.Client.ClientId,
-                ClientSecret = _clientSetting.Client.ClientSecret,
+                ClientId = _clientSetting.WebClient.ClientId,
+                ClientSecret = _clientSetting.WebClient.ClientSecret,
                 Address = discovery.TokenEndpoint
             };
 

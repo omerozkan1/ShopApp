@@ -48,8 +48,8 @@ namespace ShopApp.Web.Services.Concrete
             var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
             RefreshTokenRequest refreshTokenRequest = new()
             {
-                ClientId = _clientSetting.ClientForUser.ClientId,
-                ClientSecret = _clientSetting.ClientForUser.ClientSecret,
+                ClientId = _clientSetting.WebClientForUser.ClientId,
+                ClientSecret = _clientSetting.WebClientForUser.ClientSecret,
                 RefreshToken = refreshToken,
                 Address = discovery.TokenEndpoint,
             };
@@ -92,8 +92,8 @@ namespace ShopApp.Web.Services.Concrete
             var refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
             TokenRevocationRequest tokenRevocationRequest = new()
             {
-                ClientId = _clientSetting.ClientForUser.ClientId,
-                ClientSecret = _clientSetting.ClientForUser.ClientSecret,
+                ClientId = _clientSetting.WebClientForUser.ClientId,
+                ClientSecret = _clientSetting.WebClientForUser.ClientSecret,
                 Address = discovery.RevocationEndpoint,
                 Token = refreshToken,
                 TokenTypeHint = "refresh_token"
@@ -117,8 +117,8 @@ namespace ShopApp.Web.Services.Concrete
 
             var passwordTokenRequest = new PasswordTokenRequest
             {
-                ClientId = _clientSetting.ClientForUser.ClientId,
-                ClientSecret = _clientSetting.ClientForUser.ClientSecret,
+                ClientId = _clientSetting.WebClientForUser.ClientId,
+                ClientSecret = _clientSetting.WebClientForUser.ClientSecret,
                 UserName = signIn.Email,
                 Password = signIn.Password,
                 Address = discovery.TokenEndpoint

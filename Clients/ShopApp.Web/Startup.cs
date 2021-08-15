@@ -30,7 +30,6 @@ namespace ShopApp.Web
             services.AddAccessTokenManagement();
 
             services.AddDependencies(Configuration);
-            //services.ConfigureWritable<ProductViewModel>(Configuration.GetSection("products"));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
             {
                 opt.LoginPath = "/Auth/SignIn";

@@ -1,4 +1,4 @@
-﻿RemoveBasketItem@model BasketViewModel
+﻿@model BasketViewModel
 @{
     ViewData["Title"] = "Index";
     var culture = new System.Globalization.CultureInfo("tr-TR"); // create InvariantCulture
@@ -14,13 +14,14 @@
                     Cart
                 </h5>
 
-                @if (Model != null && Model.BasketItems.Any())
+                @if (Model != null && Model.BasketItems != null)
                 {
                     <table class="table table-striped">
 
                         <tr>
                             <th>Product Name</th>
                             <th>Price</th>
+                            <th>Quantity</th>
                             <th>Process</th>
                         </tr>
 
@@ -29,6 +30,7 @@
                             <tr>
                                 <td>@basketItem.ProductName</td>
                                 <td>@basketItem.Price</td>
+                                <td>@basketItem.Quantity</td>
                                 <td>
                                     <a class="btn btn-danger" asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-productId="@basketItem.ProductId">Delete</a>
                                 </td>
@@ -42,6 +44,7 @@
 
                     </table>
 
+                    <a class="btn btn-danger" asp-controller="Basket" asp-action="RemoveAll">Delete All</a>
                     <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Keep shopping</a>
                 }
                 else
